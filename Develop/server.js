@@ -63,6 +63,11 @@ app.post("/api/notes", (req, res) => {
   }
 });
 
+// GET request for wildcard to return index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
 // Display PORT to terminal
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
