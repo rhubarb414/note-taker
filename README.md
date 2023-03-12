@@ -1,23 +1,23 @@
-# Note Taker Starter Code
+# Note Taker
 
-## Acceptance Criteria
+## Description
 
-GIVEN a note-taking application
+This app allows users to create and store notes that persist on a backend server, so they're available anywhere with an internet connection.
 
-WHEN I open the Note Taker
-THEN I am presented with a landing page with a link to a notes page
+Building the back-end for this app was the first time I've gotten deep into full-stack development. Connecting the front end index.js to the backend server.js was challenging at times, but has now provided me with a deeper understanding of how client and server interact.
 
-<!-- WHEN I click on the link to the notes page
-THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column -->
+## Usage
 
-<!-- WHEN I enter a new note title and the note’s text
-THEN a Save icon appears in the navigation at the top of the page -->
+This app is deployed to Heroku at: [https://infinite-shelf-68467.herokuapp.com/](https://infinite-shelf-68467.herokuapp.com/)
 
-<!-- WHEN I click on the Save icon
-THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes -->
+Any saved notes are listed on the side bar to the left, and they can be deleted by clicking the trash can icon.
 
-WHEN I click on an existing note in the list in the left-hand column
-THEN that note appears in the right-hand column
+View this demo gif: ![animation of note taker app in use](./note-taker-demo.gif)
 
-WHEN I click on the Write icon in the navigation at the top of the page
-THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
+## Credits
+
+The front end was provided by Berekley Coding Bootcamp.
+
+## License
+
+The backend code is under the MIT license. See documentation in repo.
