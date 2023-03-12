@@ -68,6 +68,31 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
+// DELETE request for destroying invididual notes
+app.delete("/api/notes/:id", (req, res) => {
+  const { id } = req.params;
+
+  fs.readFile(`./db/db.json`, "utf8", (err, data) => {
+    if (err) {
+      console.error("read error: " + err);
+      res.status(500).json("Error deleting note");
+    } else {
+      const notesArr = JSON.parse(data);
+      for (let i = 0; i < notesArr.length; i++) {
+        if (notesArr[i].id === id) {
+          console.log("removing note titled: " + notesArr[i].title);
+          notesArr.splice(i, 1);
+        }
+      }
+      const notesString = JSON.stringify(notesArr, null, 4);
+      fs.writeFile(`./db/db.json`, notesString, (err) =>
+        err ? console.error(err) : console.log(`DB updated`)
+      );
+      res.status(200).json("Success!");
+    }
+  });
+});
+
 // Display PORT to terminal
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
