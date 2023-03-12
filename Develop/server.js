@@ -1,6 +1,7 @@
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
 const PORT = process.env.PORT || 3001;
 
@@ -35,22 +36,30 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
+      id: uuidv4(), // add uuid to each new note
     };
 
     // Parse current db into an array so newNote can be pushed to it
     // and then save the new db.
     fs.readFile(`./db/db.json`, "utf8", (err, data) => {
-      const notesArr = JSON.parse(data);
-      notesArr.push(newNote);
-      const notesString = JSON.stringify(notesArr, null, 4);
-      fs.writeFile(`./db/db.json`, notesString, (err) =>
-        err
-          ? console.error(err)
-          : console.log(
-              `Note titled '${newNote.title}' has been written to JSON file`
-            )
-      );
+      if (err) {
+        console.error("read error: " + err);
+      } else {
+        const notesArr = JSON.parse(data);
+        notesArr.push(newNote);
+        const notesString = JSON.stringify(notesArr, null, 4);
+        fs.writeFile(`./db/db.json`, notesString, (err) =>
+          err
+            ? console.error(err)
+            : console.log(
+                `Note titled '${newNote.title}' has been written to JSON file`
+              )
+        );
+      }
     });
+    res.status(200).json("Success!");
+  } else {
+    res.status(500).json("Error saving note");
   }
 });
 
